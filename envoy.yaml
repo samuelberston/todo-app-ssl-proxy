@@ -1,10 +1,3 @@
-admin:
-  access_log_path: /tmp/envoy.admin.log
-  address:
-    socket_address:
-      protocol: TCP
-      address: 0.0.0.0
-      port_value: 9901
 static_resources:
   listeners:
     - name: listener_0
@@ -20,9 +13,9 @@ static_resources:
               common_tls_context:
                 tls_certificates:
                   - certificate_chain:
-                      filename: "/etc/certs/example-com.crt"
+                      filename: "/etc/certs/certificate.pem"
                     private_key:
-                      filename: "/etc/certs/example-com.key"
+                      filename: "/etc/certs/key.pem"
           filters:
             - name: envoy.filters.network.http_connection_manager
               typed_config:
