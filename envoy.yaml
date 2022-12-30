@@ -1,3 +1,10 @@
+admin:
+  access_log_path: /tmp/envoy.admin.log
+  address:
+    socket_address:
+      protocol: TCP
+      address: 0.0.0.0
+      port_value: 9901
 static_resources:
   listeners:
     - name: listener_0
@@ -30,15 +37,15 @@ static_resources:
                         - match:
                             prefix: "/"
                           route:
-                            cluster: service_todo_localhost
+                            cluster: todo_app
                 http_filters:
                   - name: envoy.filters.http.router
   clusters:
-    - name: service_todo_localhost
+    - name: todo_app
       connect_timeout: 0.25s
       type: STATIC
       load_assignment:
-        cluster_name: service_todo_localhost
+        cluster_name: todo_app
         endpoints:
           - lb_endpoints:
               - endpoint:
