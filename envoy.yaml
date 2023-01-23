@@ -31,17 +31,18 @@ static_resources:
                   prefix: "/"
                 route:
                   cluster: todo-react
-        # transport_socket:
-        #   name: envoy.transport_sockets.tls
-        #   typed_config:
-        #     "@type": type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.DownstreamTlsContext
-        #     common_tls_context:
-        #       tls_certificates:
-        #         - certificate_chain: {filename: "/etc/certs/server.crt"}
-        #           private_key: {filename: "/etc/certs/server.key"}
+      transport_socket:
+        name: envoy.transport_sockets.tls
+        typed_config:
+          "@type": type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.DownstreamTlsContext
+          common_tls_context:
+            tls_certificates:
+              - certificate_chain: {filename: "/etc/certs/server.crt"}
+                private_key: {filename: "/etc/certs/server.key"}
   clusters:
   - name: todo-react
     connect_timeout: 5s
+    type: strict_dns
     load_assignment:
       cluster_name: todo-react
       endpoints:
@@ -49,5 +50,5 @@ static_resources:
           - endpoint:
               address:
                 socket_address:
-                  address: 0.0.0.0
+                  address: todo-react
                   port_value: 8080
