@@ -1,6 +1,5 @@
-This is the Envoy proxy to enable TLS for the todo-app.
+docker build -t sberston/todo-app-ssl-proxy .
 
-Since I am doing this on the plane I still need to configure the remote git repository
+docker push sberston/todo-app-ssl-proxy
 
-docker build -t todo-app-ssl-proxy .
-docker run -p 8433:8433 -p 9901:9901 todo-app-ssl-proxy
+docker run -p 8433:8433 -p 9901:9901 sberston/todo-app-ssl-proxy
